@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#111210"><meta name="description" content="Estudio móvil de accesorios faciales 2D y 3D.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#111210"><meta name="description" content="Realidad aumentada facial: importa un accesorio y elige el punto del rostro que seguirá.">
 <title>FacaLab · Estudio</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script>
@@ -19,14 +19,14 @@
 <div class="base-caption">CABEZA · VISTA FRONTAL</div>
 <button id="startBtn" class="camera-cta"><span class="camera-dot"></span> Probar en cámara</button>
 </div>
-<canvas id="overlay2d"></canvas><div id="threeLayer"></div>
+<canvas id="overlay2d"></canvas><div id="threeLayer"></div><div id="anchorMarker" class="anchor-marker hidden"><span></span></div>
 <div class="tracking-label"><i></i><span id="trackingState">Modelo base</span></div>
 <div id="faceHint" class="face-hint">Coloca el accesorio sobre el rostro</div>
 </div>
 <div class="stage-footer"><span id="assetName">Lentes · muestra</span><span class="footer-actions"><button id="captureBtn" class="capture-btn"><span>●</span> Foto</button><button id="downloadBtn" class="download-btn" aria-label="Descargar foto">↓</button></span></div>
 </section>
 <section class="editor">
-<div class="editor-heading"><div><span class="eyebrow">BIBLIOTECA</span><h2>Accesorios</h2></div><button id="openUpload" class="add-btn" aria-label="Agregar un accesorio">＋</button></div>
+<div class="editor-heading"><div><span class="eyebrow">AR · SEGUIMIENTO FACIAL</span><h2>Accesorios</h2></div><button id="openUpload" class="add-btn" aria-label="Agregar un accesorio">＋</button></div>
 <div class="filter-grid">
 <button class="filter-card selected" data-filter="glasses"><span class="thumb glasses-thumb"><svg viewBox="0 0 100 58"><g fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="13" width="34" height="27" rx="10"/><rect x="58" y="13" width="34" height="27" rx="10"/><path d="M42 22q8-8 16 0M8 20 2 16m90 4 6-4"/></g></svg></span><span class="filter-info"><b>Lentes</b><small>Accesorio de muestra</small></span></button>
 <button class="filter-card" data-filter="crown"><span class="thumb crown-thumb"><svg viewBox="0 0 100 58"><path d="m13 42 8-25 17 13 12-20 13 20 17-13 8 25z"/><path d="M17 47h66"/></svg></span><span class="filter-info"><b>Corona</b><small>Accesorio de muestra</small></span></button>
@@ -34,7 +34,12 @@
 </div>
 <div id="assetSummary" class="asset-summary hidden"></div>
 <div class="tools-row"><span class="tools-title">Tus archivos</span><label class="import-link">Importar archivo<input id="assetInput" type="file" accept="image/png,image/webp,image/jpeg,.glb,.gltf,model/gltf-binary,model/gltf+json"></label></div>
-<p class="format-note">Imagen transparente o modelo 3D GLB. Los archivos se cargan desde tu dispositivo.</p>
+<p class="format-note">Sube una imagen o un modelo GLB y elige en qué parte de la cara fijarlo.</p>
+<div class="anchor-panel">
+<div class="anchor-heading"><div><span class="eyebrow">ANCLAJE</span><b>¿Dónde se fija?</b></div><button id="pickAnchorBtn" class="pick-anchor-btn">Elegir en cabeza</button></div>
+<div class="anchor-select-wrap"><label for="anchorSelect">Punto que seguirá el accesorio</label><select id="anchorSelect"><option value="eyes">Ojos</option><option value="forehead">Frente</option><option value="bridge">Puente de nariz</option><option value="nose">Nariz</option><option value="mouth">Boca</option><option value="chin">Barbilla</option><option value="leftEar">Oreja izquierda</option><option value="rightEar">Oreja derecha</option><option value="custom">Punto elegido en la cabeza</option></select></div>
+<p id="anchorHelp" class="anchor-help">El modelo seguirá este punto mientras gires y muevas la cabeza.</p>
+</div>
 <div id="adjustPanel" class="adjust-panel">
 <div class="adjust-head"><div><span class="eyebrow">AJUSTES</span><b>Colocación</b></div><button id="resetAdjust" class="reset-btn">Restablecer</button></div>
 <div class="slider-row"><label for="sizeRange">Tamaño</label><output id="sizeOut">100%</output><input id="sizeRange" type="range" min="50" max="180" value="100"></div>

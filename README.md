@@ -11,7 +11,7 @@ Cada cambio publicado en la rama `main` genera una APK instalable y una versión
 - Importador Android de GLB binarios mediante lectura directa del archivo (sin blob URL), imágenes y selector de puntos faciales.
 - Gizmos 3D táctiles de mover, girar y escalar con ejes XYZ o por eje; el modelo mantiene su transformación cuando el tracking actualiza el anclaje.
 - Ajustes de tamaño, posición y opacidad; captura y descarga de foto.
-- WebView Android con permiso de cámara solicitado al usarla.
+- Android empaqueta localmente Three.js, MediaPipe y la interfaz en un solo script WebView; evita depender de que carguen módulos CDN al iniciar. El modelo de seguimiento facial y el runtime de MediaPipe aún se descargan por Internet.
 
 ## Permisos y privacidad
 Android solicita permiso de cámara cuando la app intenta abrirla. No se usa micrófono. El video y el seguimiento facial se procesan en el dispositivo; no hay un servidor de video. La app necesita Internet para descargar las bibliotecas y el modelo de tracking, y para cargar three.js y accesorios GLB.

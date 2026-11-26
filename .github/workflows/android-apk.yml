@@ -12,6 +12,7 @@ on:
       - 'manifest.webmanifest'
       - 'icon.svg'
       - 'sw.js'
+      - 'package.json'
   workflow_dispatch:
 
 permissions:
@@ -29,6 +30,25 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Bundle web app locally for Android WebView
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          npm install --no-audit --no-fund
+          npm run build:android
+          python3 - <<'PY'
+          from pathlib import Path
+          source = Path('index.html').read_text()
+          target = source.replace('<script type="module" src="app.js"></script>', '<script src="app.bundle.js"></script>')
+          if target == source:
+              raise SystemExit('Could not switch Android entry point to bundled local script')
+          Path('android/app/src/main/assets/index.html').write_text(target)
+          for name in ['style.css', 'manifest.webmanifest', 'icon.svg', 'sw.js']:
+              Path('android/app/src/main/assets', name).write_bytes(Path(name).read_bytes())
+          PY
       - name: Locate Android SDK tools on runner
         run: |
           SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
@@ -63,8 +83,6 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}
           name: FacaLab Android v1.0.${{ github.run_number }}
           body: |
-            APK de prueba de FacaLab.
-
-            Instálala en Android y concede permiso de cámara cuando la app lo solicite. El tracking requiere conexión a Internet para descargar MediaPipe y su modelo.
+            APK de prueba de FacaLab. La interfaz Three.js y MediaPipe se empaquetan en la APK; para seguimiento facial se necesita conexión a Internet para descargar el runtime/modelo de MediaPipe.
           files: android/app/build/outputs/apk/debug/app-debug.apk
           generate_release_notes: true

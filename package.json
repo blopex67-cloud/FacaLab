@@ -1,0 +1,15 @@
+{
+  "name": "facalab-android-web-bundle",
+  "private": true,
+  "version": "1.0.15",
+  "scripts": {
+    "build:android": "esbuild app.js --bundle --platform=browser --format=iife --target=es2020 --outfile=android/app/src/main/assets/app.bundle.js"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.14",
+    "three": "0.165.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2"
+  }
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#090b12"><meta name="description" content="Crea y prueba filtros faciales 2D y 3D desde el teléfono.">
+<title>FacaLab — filtros faciales</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">F</span><span>Faca<span class="accent">Lab</span><small>STUDIO DE FILTROS</small></span></a><button id="savedBtn" class="icon-btn" aria-label="Filtros guardados">♡</button></header>
+<main>
+<section class="stage-wrap">
+<div class="stage" id="stage">
+<video id="camera" autoplay muted playsinline></video><canvas id="overlay2d"></canvas><div id="threeLayer"></div>
+<div id="emptyState" class="empty-state"><div class="face-icon">◉</div><b>Tu estudio de filtros</b><span>Enciende la cámara para empezar a probar.</span><button id="startBtn" class="primary">◉ &nbsp; Encender cámara</button><small>El seguimiento se procesa en este dispositivo.</small></div>
+<div class="live-pill"><i></i><span id="trackingState">Cámara apagada</span></div>
+<button id="flipBtn" class="flip-btn" aria-label="Cambiar cámara">↻</button>
+<div id="faceHint" class="face-hint">Coloca tu rostro en el centro</div>
+</div>
+<div class="stage-footer"><span id="assetName">Filtro demo · Lentes neón</span><button id="captureBtn" class="capture" aria-label="Tomar foto"></button><button id="downloadBtn" class="icon-btn" aria-label="Descargar foto">↓</button></div>
+</section>
+<section class="editor">
+<div class="section-head"><div><span class="eyebrow">CREADOR</span><h1>Diseña tu filtro</h1></div><button id="saveBtn" class="save-btn">Guardar</button></div>
+<div class="tabs"><button class="tab active" data-tab="library">Explorar</button><button class="tab" data-tab="upload">Mis accesorios</button><button class="tab" data-tab="adjust">Ajustar</button></div>
+<div id="libraryPanel" class="panel">
+<div class="filter-grid">
+<button class="filter-card selected" data-filter="glasses"><span class="filter-art glasses-art">◎──◎</span><b>Lentes neón</b><small>2D · demo</small></button>
+<button class="filter-card" data-filter="crown"><span class="filter-art crown-art">♛</span><b>Corona</b><small>2D · demo</small></button>
+<button class="filter-card" data-filter="none"><span class="filter-art none-art">＋</span><b>Sin accesorio</b><small>Vista limpia</small></button>
+</div><p class="tip">Sube un PNG transparente para crear tu accesorio 2D o un modelo GLB/GLTF para probarlo en 3D.</p>
+</div>
+<div id="uploadPanel" class="panel hidden">
+<label class="upload-card"><span class="upload-symbol">＋</span><b>Agregar accesorio</b><small>PNG / WEBP / JPG o modelo GLB / GLTF</small><input id="assetInput" type="file" accept="image/png,image/webp,image/jpeg,.glb,.gltf,model/gltf-binary,model/gltf+json"></label>
+<div id="assetMeta" class="asset-meta hidden"></div>
+</div>
+<div id="adjustPanel" class="panel hidden">
+<div class="slider-row"><label for="sizeRange">Tamaño</label><output id="sizeOut">100%</output><input id="sizeRange" type="range" min="50" max="180" value="100"></div>
+<div class="slider-row"><label for="xRange">Posición horizontal</label><output id="xOut">0</output><input id="xRange" type="range" min="-30" max="30" value="0"></div>
+<div class="slider-row"><label for="yRange">Posición vertical</label><output id="yOut">0</output><input id="yRange" type="range" min="-40" max="40" value="0"></div>
+<div class="slider-row"><label for="opacityRange">Opacidad</label><output id="opacityOut">100%</output><input id="opacityRange" type="range" min="20" max="100" value="100"></div>
+</div>
+</section>
+</main>
+<div id="toast" role="status"></div>
+<script type="module" src="app.js"></script>
+</body></html>

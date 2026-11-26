@@ -1,14 +1,14 @@
 # FacaLab
 
-App Android en desarrollo para diseñar y probar accesorios faciales con una cabeza base 3D y cámara en vivo.
+App Android para probar accesorios faciales en realidad aumentada móvil. Importas una imagen o un modelo GLB, eliges qué punto de la cara lo ancla (ojos, frente, nariz, boca, barbilla u orejas) o tocas la cabeza para fijarlo en un punto personalizado; luego el tracking facial mantiene el accesorio siguiendo ese punto al mover la cabeza.
 
 ## APK automática
 Cada cambio publicado en la rama `main` genera una APK instalable y una versión descargable en **Releases**. El workflow también conserva un artefacto de la compilación en Actions. La APK de prueba se firma con la clave debug de Android; no es una firma de publicación para Google Play.
 
 ## Incluye
-- Vista de una cabeza base 3D y modo cámara.
-- Seguimiento facial en el teléfono con MediaPipe Face Landmarker.
-- Accesorios de muestra, importación de imágenes y modelos 3D GLB.
+- Vista de una cabeza base 3D interactiva para ensayar el anclaje y modo cámara.
+- Seguimiento facial en el teléfono con MediaPipe Face Landmarker, que mantiene el accesorio unido al punto facial elegido.
+- Accesorios de muestra, importación de imágenes y modelos 3D GLB; selector de puntos faciales y elección personalizada tocando la cabeza/vista.
 - Ajustes de tamaño, posición y opacidad; captura y descarga de foto.
 - WebView Android con permiso de cámara solicitado al usarla.
 
@@ -16,4 +16,4 @@ Cada cambio publicado en la rama `main` genera una APK instalable y una versión
 Android solicita permiso de cámara cuando la app intenta abrirla. No se usa micrófono. El video y el seguimiento facial se procesan en el dispositivo; no hay un servidor de video. La app necesita Internet para descargar las bibliotecas y el modelo de tracking, y para cargar three.js y accesorios GLB.
 
 ## Estado
-Es un prototipo funcional en progreso. El tracking se basa en los puntos faciales de MediaPipe; la colocación de modelos 3D es inicial y modelos con orientaciones distintas pueden necesitar ajustes. Generar la APK en Actions no equivale a probarla en un teléfono físico.
+Es una primera versión de realidad aumentada facial, no una app para casco VR ni seguimiento espacial del cuarto. El tracking se basa en los puntos faciales de MediaPipe; la orientación 3D del modelo es aproximada y los modelos con pivote/ejes distintos pueden requerir ajuste. Generar la APK en Actions no equivale a probarla en un teléfono físico.

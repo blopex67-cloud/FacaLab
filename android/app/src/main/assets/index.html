@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#111210"><meta name="description" content="Estudio móvil de accesorios faciales 2D y 3D.">
+<title>FacaLab · Estudio</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#" aria-label="FacaLab inicio"><span class="brand-mark">f</span><span>faca<span class="brand-light">lab</span></span></a><span class="top-caption">ESTUDIO DE ACCESORIOS</span><button id="savedBtn" class="saved-btn" aria-label="Recuperar ajustes guardados"><span>↶</span></button></header>
+<main>
+<section class="workspace">
+<div class="workspace-head"><div><div class="eyebrow">PROYECTO SIN TÍTULO</div><h1>Prueba tu accesorio</h1></div><button id="saveBtn" class="save-btn">Guardar</button></div>
+<div class="stage" id="stage">
+<div class="stage-toolbar"><div class="mode-switch" role="group" aria-label="Modo de vista"><button id="modeBase" class="mode active">Modelo base</button><button id="modeLive" class="mode">Cámara</button></div><button id="flipBtn" class="flip-btn" aria-label="Cambiar cámara" title="Cambiar cámara">↻</button></div>
+<video id="camera" autoplay muted playsinline></video>
+<div id="basePreview" class="base-preview" aria-label="Modelo base de rostro">
+
+<div class="base-caption">CABEZA · VISTA FRONTAL</div>
+<button id="startBtn" class="camera-cta"><span class="camera-dot"></span> Probar en cámara</button>
+</div>
+<canvas id="overlay2d"></canvas><div id="threeLayer"></div>
+<div class="tracking-label"><i></i><span id="trackingState">Modelo base</span></div>
+<div id="faceHint" class="face-hint">Coloca el accesorio sobre el rostro</div>
+</div>
+<div class="stage-footer"><span id="assetName">Lentes · muestra</span><span class="footer-actions"><button id="captureBtn" class="capture-btn"><span>●</span> Foto</button><button id="downloadBtn" class="download-btn" aria-label="Descargar foto">↓</button></span></div>
+</section>
+<section class="editor">
+<div class="editor-heading"><div><span class="eyebrow">BIBLIOTECA</span><h2>Accesorios</h2></div><button id="openUpload" class="add-btn" aria-label="Agregar un accesorio">＋</button></div>
+<div class="filter-grid">
+<button class="filter-card selected" data-filter="glasses"><span class="thumb glasses-thumb"><svg viewBox="0 0 100 58"><g fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="13" width="34" height="27" rx="10"/><rect x="58" y="13" width="34" height="27" rx="10"/><path d="M42 22q8-8 16 0M8 20 2 16m90 4 6-4"/></g></svg></span><span class="filter-info"><b>Lentes</b><small>Accesorio de muestra</small></span></button>
+<button class="filter-card" data-filter="crown"><span class="thumb crown-thumb"><svg viewBox="0 0 100 58"><path d="m13 42 8-25 17 13 12-20 13 20 17-13 8 25z"/><path d="M17 47h66"/></svg></span><span class="filter-info"><b>Corona</b><small>Accesorio de muestra</small></span></button>
+<button class="filter-card" data-filter="none"><span class="thumb blank-thumb"><span>—</span></span><span class="filter-info"><b>Sin accesorio</b><small>Rostro sin editar</small></span></button>
+</div>
+<div id="assetSummary" class="asset-summary hidden"></div>
+<div class="tools-row"><span class="tools-title">Tus archivos</span><label class="import-link">Importar archivo<input id="assetInput" type="file" accept="image/png,image/webp,image/jpeg,.glb,.gltf,model/gltf-binary,model/gltf+json"></label></div>
+<p class="format-note">Imagen transparente o modelo 3D GLB. Los archivos se cargan desde tu dispositivo.</p>
+<div id="adjustPanel" class="adjust-panel">
+<div class="adjust-head"><div><span class="eyebrow">AJUSTES</span><b>Colocación</b></div><button id="resetAdjust" class="reset-btn">Restablecer</button></div>
+<div class="slider-row"><label for="sizeRange">Tamaño</label><output id="sizeOut">100%</output><input id="sizeRange" type="range" min="50" max="180" value="100"></div>
+<div class="slider-row"><label for="xRange">Horizontal</label><output id="xOut">0</output><input id="xRange" type="range" min="-30" max="30" value="0"></div>
+<div class="slider-row"><label for="yRange">Vertical</label><output id="yOut">0</output><input id="yRange" type="range" min="-40" max="40" value="0"></div>
+<div class="slider-row"><label for="opacityRange">Opacidad</label><output id="opacityOut">100%</output><input id="opacityRange" type="range" min="20" max="100" value="100"></div>
+</div>
+</section>
+</main>
+<div class="privacy-note">La imagen de cámara se procesa en el teléfono y no se envía a un servidor.</div>
+<div id="toast" role="status"></div>
+<script type="module" src="app.js"></script>
+</body></html>

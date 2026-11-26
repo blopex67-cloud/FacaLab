@@ -1,16 +1,19 @@
-# FacaLab — estudio móvil de filtros faciales
+# FacaLab
 
-Prototipo web instalable (PWA) para probar accesorios 2D y modelos GLB en vivo desde la cámara frontal del teléfono.
+App Android en desarrollo para diseñar y probar accesorios faciales con una cabeza base 3D y cámara en vivo.
 
-## Qué incluye
-- Vista en directo y tracking facial con MediaPipe Face Landmarker.
-- Filtros demo 2D (lentes y corona), accesorios propios PNG/JPG/WEBP y carga de modelos 3D GLB con Three.js.
-- Controles para tamaño, posición vertical/horizontal y opacidad.
-- Captura PNG, instalación como PWA y guardado local de los ajustes.
-- El video y la detección facial se procesan dentro del navegador; esta versión no transmite la cámara a un servidor.
+## APK automática
+Cada cambio publicado en la rama `main` genera una APK instalable y una versión descargable en **Releases**. El workflow también conserva un artefacto de la compilación en Actions. La APK de prueba se firma con la clave debug de Android; no es una firma de publicación para Google Play.
 
-## Probar en teléfono
-El acceso a cámara requiere HTTPS y permiso del navegador. Publica el contenido de esta carpeta como sitio estático (por ejemplo GitHub Pages), abre la URL segura y permite cámara. La PWA guarda el cascarón de la interfaz para abrirlo sin conexión, pero el tracking usa bibliotecas y el modelo descargados por Internet. Requiere conexión a Internet para descargar las bibliotecas y el modelo de tracking.
+## Incluye
+- Vista de una cabeza base 3D y modo cámara.
+- Seguimiento facial en el teléfono con MediaPipe Face Landmarker.
+- Accesorios de muestra, importación de imágenes y modelos 3D GLB.
+- Ajustes de tamaño, posición y opacidad; captura y descarga de foto.
+- WebView Android con permiso de cámara solicitado al usarla.
 
-## Importante
-Es un MVP: el anclaje 3D usa una aproximación 2D de los puntos del rostro; los GLB de distintas orientaciones pueden necesitar ajustes o una configuración de anclaje por tipo de accesorio. Los archivos importados no se guardan en servidor; el preset local guarda solo ajustes. Esta versión no crea APK nativa ni publica filtros en redes.
+## Permisos y privacidad
+Android solicita permiso de cámara cuando la app intenta abrirla. No se usa micrófono. El video y el seguimiento facial se procesan en el dispositivo; no hay un servidor de video. La app necesita Internet para descargar las bibliotecas y el modelo de tracking, y para cargar three.js y accesorios GLB.
+
+## Estado
+Es un prototipo funcional en progreso. El tracking se basa en los puntos faciales de MediaPipe; la colocación de modelos 3D es inicial y modelos con orientaciones distintas pueden necesitar ajustes. Generar la APK en Actions no equivale a probarla en un teléfono físico.

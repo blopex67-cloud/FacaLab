@@ -8,7 +8,8 @@ Cada cambio publicado en la rama `main` genera una APK instalable y una versión
 ## Incluye
 - Vista de una cabeza base 3D interactiva para ensayar el anclaje y modo cámara.
 - Seguimiento facial en el teléfono con MediaPipe Face Landmarker, que mantiene el accesorio unido al punto facial elegido.
-- Accesorios de muestra, importación de imágenes y modelos 3D GLB; selector de puntos faciales y elección personalizada tocando la cabeza/vista.
+- Importador Android de GLB binarios mediante lectura directa del archivo (sin blob URL), imágenes y selector de puntos faciales.
+- Gizmos 3D táctiles de mover, girar y escalar con ejes XYZ o por eje; el modelo mantiene su transformación cuando el tracking actualiza el anclaje.
 - Ajustes de tamaño, posición y opacidad; captura y descarga de foto.
 - WebView Android con permiso de cámara solicitado al usarla.
 
@@ -16,4 +17,4 @@ Cada cambio publicado en la rama `main` genera una APK instalable y una versión
 Android solicita permiso de cámara cuando la app intenta abrirla. No se usa micrófono. El video y el seguimiento facial se procesan en el dispositivo; no hay un servidor de video. La app necesita Internet para descargar las bibliotecas y el modelo de tracking, y para cargar three.js y accesorios GLB.
 
 ## Estado
-Es una primera versión de realidad aumentada facial, no una app para casco VR ni seguimiento espacial del cuarto. El tracking se basa en los puntos faciales de MediaPipe; la orientación 3D del modelo es aproximada y los modelos con pivote/ejes distintos pueden requerir ajuste. Generar la APK en Actions no equivale a probarla en un teléfono físico.
+Es una primera versión de realidad aumentada facial, no una app para casco VR ni seguimiento espacial del cuarto. El tracking se basa en los puntos faciales de MediaPipe; la orientación 3D de modelos con pivote/ejes distintos puede requerir ajuste. Importa GLB binario (no un .gltf externo con texturas separadas). Generar la APK en Actions no equivale a probarla en un teléfono físico.

@@ -23,6 +23,13 @@
 <div class="tracking-label"><i></i><span id="trackingState">Modelo base</span></div>
 <div id="faceHint" class="face-hint">Coloca el accesorio sobre el rostro</div>
 </div>
+<div class="gizmo-toolbar" aria-label="Herramientas para colocar el modelo">
+<div class="gizmo-modes"><button class="gizmo-mode active" disabled data-mode="translate" aria-label="Mover" title="Mover">↔</button><button class="gizmo-mode" disabled data-mode="rotate" aria-label="Girar" title="Girar">⟳</button><button class="gizmo-mode" disabled data-mode="scale" aria-label="Escalar" title="Escalar">⤢</button></div>
+<span class="gizmo-separator"></span>
+<div class="gizmo-axes"><button class="gizmo-axis active" disabled data-axis="XYZ">XYZ</button><button class="gizmo-axis axis-x" disabled data-axis="X">X</button><button class="gizmo-axis axis-y" disabled data-axis="Y">Y</button><button class="gizmo-axis axis-z" disabled data-axis="Z">Z</button></div>
+<button id="resetGizmo" disabled class="gizmo-reset" title="Restablecer posición" aria-label="Restablecer posición">↺</button>
+<span id="gizmoState" class="gizmo-state">Importa un GLB para posicionarlo</span>
+</div>
 <div class="stage-footer"><span id="assetName">Lentes · muestra</span><span class="footer-actions"><button id="captureBtn" class="capture-btn"><span>●</span> Foto</button><button id="downloadBtn" class="download-btn" aria-label="Descargar foto">↓</button></span></div>
 </section>
 <section class="editor">
@@ -33,7 +40,7 @@
 <button class="filter-card" data-filter="none"><span class="thumb blank-thumb"><span>—</span></span><span class="filter-info"><b>Sin accesorio</b><small>Rostro sin editar</small></span></button>
 </div>
 <div id="assetSummary" class="asset-summary hidden"></div>
-<div class="tools-row"><span class="tools-title">Tus archivos</span><label class="import-link">Importar archivo<input id="assetInput" type="file" accept="image/png,image/webp,image/jpeg,.glb,.gltf,model/gltf-binary,model/gltf+json"></label></div>
+<div class="tools-row"><span class="tools-title">Tus archivos</span><label class="import-link">Importar archivo<input id="assetInput" type="file" accept="image/png,image/webp,image/jpeg,.glb,model/gltf-binary,application/octet-stream"></label></div>
 <p class="format-note">Sube una imagen o un modelo GLB y elige en qué parte de la cara fijarlo.</p>
 <div class="anchor-panel">
 <div class="anchor-heading"><div><span class="eyebrow">ANCLAJE</span><b>¿Dónde se fija?</b></div><button id="pickAnchorBtn" class="pick-anchor-btn">Elegir en cabeza</button></div>
